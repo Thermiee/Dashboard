@@ -26,7 +26,7 @@ const Sidebar = () => {
     <div className="flex">
       <div
         className={`${
-          open ? ' w-11/12' : 'w-1/2'
+          open ? ' w-full' : 'w-1/2'
         } duration-500 h-screen p-5 pt-8 bg-blue-600 relative`}
       >
         <BsFillArrowLeftCircleFill
