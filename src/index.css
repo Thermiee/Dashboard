@@ -1,4 +1,8 @@
-body {
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* body {
   margin: 0;
   font-family:
     -apple-system,
@@ -24,4 +28,4 @@ code {
     Consolas,
     'Courier New',
     monospace;
-}
+} */
