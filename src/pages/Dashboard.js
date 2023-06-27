@@ -2,7 +2,7 @@ import React from 'react';
 import Sidebar from '../components/Sidebar';
 
 const Dashboard = () => (
-  <div className="flex">
+  <div className="flex items-center ">
 
     <Sidebar />
 

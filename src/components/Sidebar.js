@@ -17,9 +17,7 @@ const Sidebar = () => {
     },
     {
       name: 'Contact',
-      icon: (
-        <IoMdContacts className="cursor-pointer duration-500 text-white" />
-      ),
+      icon: <IoMdContacts className="cursor-pointer duration-500 text-white" />,
       path: '/contact',
     },
   ];
@@ -41,17 +39,9 @@ const Sidebar = () => {
           <div>
             <RiFlightTakeoffLine className="cursor-pointer duration-500 text-2xl text-white" />
           </div>
-          <h1
-            className={`text-white origin-left text-lg font-medium duration-500 ${
-              !open && 'scale-0'
-            }`}
-          >
-            Offline First
-          </h1>
         </div>
         <ul className="pt-6">
           {Menus.map((menu) => (
-
             <li
               key={menu.name}
               className="flex gap-x-4 items-center pt-8 bg-blue-600 relative cursor-pointer"
@@ -67,11 +57,9 @@ const Sidebar = () => {
                 </h1>
               </Link>
             </li>
-
           ))}
         </ul>
       </div>
-
     </div>
   );
 };
