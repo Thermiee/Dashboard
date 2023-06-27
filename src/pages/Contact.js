@@ -53,7 +53,7 @@ const Contact = ({
   return (
     <div className="flex items-center">
       <Sidebar />
-      <div className="pb-24 md:pb-0 relative w-full overflow-y-auto md:overflow-visible">
+      <div className="pb-24 md:pb-0 relative w-11/12 overflow-y-auto md:overflow-visible">
 
         <div>
           <h1 className="text-2xl font-semibold mb-4">Add Contact</h1>
