@@ -52,10 +52,8 @@ const Contact = ({
 
   return (
     <div className="flex items-center">
-      <div>
-        <Sidebar />
-      </div>
-      <div className="flex p-5">
+      <Sidebar />
+      <div className="flex p-5 justify-center">
 
         <div>
           <h1 className="text-2xl font-semibold mb-4">Add Contact</h1>
@@ -131,13 +129,13 @@ const Contact = ({
                 </div>
               ))}
               {addresses.length < 5 && (
-              <button
-                type="button"
-                onClick={handleAddAddress}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              >
-                Add Address
-              </button>
+                <button
+                  type="button"
+                  onClick={handleAddAddress}
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                >
+                  Add Address
+                </button>
               )}
             </div>
             <div className="mb-4">
