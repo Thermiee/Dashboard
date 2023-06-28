@@ -8,10 +8,12 @@ const Contact = ({ handleAddContact }) => {
     name: '',
     phone: '',
     email: '',
-    addresses: [],
+    addresses: [''],
     longitude: '',
     latitude: '',
   });
+
+  // const [contactList, setContactList] = useState([]); // [{}
 
   const navigate = useNavigate();
 
@@ -26,7 +28,7 @@ const Contact = ({ handleAddContact }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     handleAddContact(contact);
-    navigate('/dashboard', { state: contact });
+    navigate('/', { state: contact });
   };
 
   const handleAddAddress = () => {
