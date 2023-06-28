@@ -11,6 +11,10 @@ const MapView = () => {
   const location = useLocation();
   const { state } = location;
 
+  if (!state) {
+    return null;
+  }
+
   return (
     <div style={{ width: '100%', height: '400px' }}>
       <MapContainer center={[0, 0]} zoom={2} style={{ width: '100%', height: '100%' }}>

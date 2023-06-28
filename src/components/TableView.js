@@ -5,6 +5,16 @@ const TableView = () => {
   const location = useLocation();
   const { state } = location;
 
+  if (!state) {
+    return (
+      <div className="flex justify-center">
+        <h1 className="text-3xl text-gray-700">
+          No data found, Add From Contact page
+        </h1>
+      </div>
+    );
+  }
+
   return (
     <div className=" md:pb-0 relative w-full overflow-y-auto md:overflow-visible">
       <table className="w-full text-sm text-center mt-7 border rounded-lg">
