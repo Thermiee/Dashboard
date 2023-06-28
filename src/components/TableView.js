@@ -1,25 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const TableView = () => {
-  const [contacts] = useState([
+  const location = useLocation();
 
-    {
-      name: 'John Doe',
-      phoneNumber: '1234567890',
-      email: 'john@example.com',
-      addresses: ['123 Main St', '456 Elm St'],
-      longitude: 0,
-      latitude: 0,
-    },
-    {
-      name: 'Jane Smith',
-      phoneNumber: '9876543210',
-      email: 'jane@example.com',
-      addresses: ['789 Oak St'],
-      longitude: 0,
-      latitude: 0,
-    },
-  ]);
+  const [contacts, setContacts] = useState([]);
+
+  useEffect(() => {
+    const { state } = location;
+    if (Array.isArray(state)) {
+      setContacts(state);
+    }
+  }, [location.state]);
 
   return (
     <div className=" md:pb-0 relative w-full overflow-y-auto md:overflow-visible">
@@ -47,7 +39,7 @@ const TableView = () => {
           </tr>
         </thead>
         <tbody>
-          {contacts.map((contact, index) => (
+          { contacts && contacts.map((contact, index) => (
           /* eslint-disable-next-line */
           <tr key={index}
             className="border"
