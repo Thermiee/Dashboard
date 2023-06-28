@@ -23,7 +23,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="flex w-[120px]">
+    <div className="flex">
       <div
         className={`${
           open ? 'w-[130px]' : 'w-[70px]'
