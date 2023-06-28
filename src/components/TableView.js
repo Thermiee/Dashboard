@@ -1,17 +1,9 @@
-import { useEffect, useState } from 'react';
+import React from 'react';
 import { useLocation } from 'react-router-dom';
 
 const TableView = () => {
   const location = useLocation();
-
-  const [contacts, setContacts] = useState([]);
-
-  useEffect(() => {
-    const { state } = location;
-    if (Array.isArray(state)) {
-      setContacts(state);
-    }
-  }, [location.state]);
+  const { state } = location;
 
   return (
     <div className=" md:pb-0 relative w-full overflow-y-auto md:overflow-visible">
@@ -39,31 +31,31 @@ const TableView = () => {
           </tr>
         </thead>
         <tbody>
-          { contacts && contacts.map((contact, index) => (
-          /* eslint-disable-next-line */
-          <tr key={index}
+
+          <tr
+            key={state.id}
             className="border"
           >
             <td className=" whitespace-nowrap px-3 py-4">
-              {contact.name}
+              {state.name}
             </td>
             <td className=" whitespace-nowrap px-3 py-4">
-              {contact.phoneNumber}
+              {state.phoneNumber}
             </td>
             <td className=" whitespace-nowrap px-3 py-4">
-              {contact.email}
+              {state.email}
             </td>
             <td className=" whitespace-nowrap px-3 py-4">
-              {contact.addresses[Math.floor(Math.random() * contact.addresses.length)]}
+              {state.addresses[Math.floor(Math.random() * state.addresses.length)]}
             </td>
             <td className=" whitespace-nowrap px-3 py-4">
-              {contact.longitude}
+              {state.longitude}
             </td>
             <td className=" whitespace-nowrap px-3 py-4">
-              {contact.latitude}
+              {state.latitude}
             </td>
           </tr>
-          ))}
+
         </tbody>
       </table>
     </div>
