@@ -1,183 +1,198 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Sidebar from '../components/Sidebar';
 
-const Contact = ({
-  handleAddContact,
+const Contact = ({ handleAddContact }) => {
+  const [contact, setContact] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    addresses: [],
+    longitude: '',
+    latitude: '',
+  });
 
-}) => {
-  const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
-  const [addresses, setAddresses] = useState([]);
-  const [longitude, setLongitude] = useState('');
-  const [latitude, setLatitude] = useState('');
+  const navigate = useNavigate();
+
+  const {
+    name, phone, email, addresses, longitude, latitude,
+  } = contact;
+
+  const handleChange = (e) => {
+    setContact({ ...contact, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newContact = {
-      name,
-      phone,
-      email,
-      addresses,
-      longitude,
-      latitude,
-    };
-
-    handleAddContact(newContact);
-    setName('');
-    setPhone('');
-    setEmail('');
-    setAddresses([]);
-    setLongitude('');
-    setLatitude('');
+    handleAddContact(contact);
+    navigate('/dashboard', { state: contact });
   };
+
   const handleAddAddress = () => {
     if (addresses.length < 5) {
-      setAddresses([...addresses, '']);
+      setContact({ ...contact, addresses: [...addresses, ''] });
     }
   };
 
   const handleRemoveAddress = (index) => {
     const updatedAddresses = [...addresses];
     updatedAddresses.splice(index, 1);
-    setAddresses(updatedAddresses);
+    setContact({ ...contact, addresses: updatedAddresses });
   };
 
   const handleAddressChange = (index, value) => {
     const updatedAddresses = [...addresses];
     updatedAddresses[index] = value;
-    setAddresses(updatedAddresses);
+    setContact({ ...contact, addresses: updatedAddresses });
   };
 
   return (
     <div className="flex">
       <Sidebar />
       <div className="flex-col p-3 w-full justify-between overflow-y-auto md:overflow-visible">
-
         <div>
           <h1 className="text-2xl font-semibold mb-4">Add Contact</h1>
-          <form onSubmit={handleSubmit} className="shadow appearance-none border rounded max-w-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+          <form
+            onSubmit={handleSubmit}
+            className="shadow appearance-none border rounded max-w-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          >
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="name"
+              >
                 Name
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="name"
+                  name="name"
                   type="text"
                   placeholder="Name"
                   value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={handleChange}
                   required
                 />
               </label>
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="phone">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="phone"
+              >
                 Phone
-
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="phone"
-                  type="text"
+                  name="phone"
+                  type="tel"
                   placeholder="Phone"
                   value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
+                  onChange={handleChange}
                   required
                 />
               </label>
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="email"
+              >
                 Email
-
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="email"
-                  type="text"
+                  name="email"
+                  type="email"
                   placeholder="Email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={handleChange}
                   required
                 />
               </label>
             </div>
             <div className="mb-4">
-
-              {addresses.map((address, index) => (
-                /* eslint-disable-next-line */
-                <div key={index}>
-                  <label htmlFor="addresses" className="block text-gray-700 text-sm font-bold mb-2">
-                    Addresses
-
-                    <input
-                      type="text"
-                      placeholder={`Enter address ${index + 1}`}
-                      value={address}
-                      onChange={(e) => handleAddressChange(index, e.target.value)}
-                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    />
-                  </label>
-                  <button
-                    type="button"
-                    onClick={() => handleRemoveAddress(index)}
-                    className="text-red-500 hover:text-red-700 font-bold ml-2"
-                  >
-                    Remove
-                  </button>
-                </div>
-              ))}
-              {addresses.length < 5 && (
-                <button
-                  type="button"
-                  onClick={handleAddAddress}
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                >
-                  Add Address
-                </button>
-              )}
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="longitude">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="longitude"
+              >
                 Longitude
-
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="longitude"
+                  name="longitude"
                   type="text"
                   placeholder="Longitude"
                   value={longitude}
-                  onChange={(e) => setLongitude(e.target.value)}
+                  onChange={handleChange}
                   required
                 />
               </label>
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="latitude">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="latitude"
+              >
                 Latitude
-
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="latitude"
+                  name="latitude"
                   type="text"
                   placeholder="Latitude"
                   value={latitude}
-                  onChange={(e) => setLatitude(e.target.value)}
+                  onChange={handleChange}
                   required
                 />
+              </label>
+            </div>
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="addresses"
+              >
+                Addresses
+                {addresses.map((address, index) => (
+                  // eslint-disable-next-line react/no-array-index-key
+                  <div key={index} className="flex">
+                    <input
+                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      name="addresses"
+                      type="text"
+                      placeholder="Address"
+                      value={address}
+                      onChange={(e) => handleAddressChange(index, e.target.value)}
+                      required
+                    />
+                    <button
+                      className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                      type="button"
+                      onClick={() => handleRemoveAddress(index)}
+                    >
+                      Remove
+                    </button>
+                  </div>
+                ))}
+                <button
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                  type="button"
+                  onClick={handleAddAddress}
+                >
+                  Add Address
+                </button>
               </label>
             </div>
             <div className="flex items-center justify-between">
               <button
-                className="bg-blue-500 hover:bg-black-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                type="button"
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                type="submit"
               >
                 Add Contact
               </button>
             </div>
           </form>
         </div>
-
       </div>
     </div>
   );
