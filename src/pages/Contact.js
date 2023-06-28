@@ -53,7 +53,7 @@ const Contact = ({
   return (
     <div className="flex">
       <Sidebar />
-      <div className="flex-col p-5 w-full justify-between overflow-y-auto md:overflow-visible">
+      <div className="flex-col p-3 w-full justify-between overflow-y-auto md:overflow-visible">
 
         <div>
           <h1 className="text-2xl font-semibold mb-4">Add Contact</h1>
