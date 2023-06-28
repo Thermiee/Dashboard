@@ -22,31 +22,59 @@ const TableView = () => {
   ]);
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Phone Number</th>
-          <th>Email</th>
-          <th>Address</th>
-          <th>Longitude</th>
-          <th>Latitude</th>
-        </tr>
-      </thead>
-      <tbody>
-        {contacts.map((contact, index) => (
-          /* eslint-disable-next-line */
-          <tr key={index}>
-            <td>{contact.name}</td>
-            <td>{contact.phoneNumber}</td>
-            <td>{contact.email}</td>
-            <td>{contact.addresses[Math.floor(Math.random() * contact.addresses.length)]}</td>
-            <td>{contact.longitude}</td>
-            <td>{contact.latitude}</td>
+    <div className=" md:pb-0 relative w-full overflow-y-auto md:overflow-visible">
+      <table className="w-full text-sm text-center mt-7 border rounded-lg">
+        <thead className="" style={{ backgroundColor: '#F8FAFC' }}>
+          <tr>
+            <th scope="col" className="px-3 py-5 whitespace-nowrap header font-semi-bold text-sm">
+              Name
+            </th>
+            <th scope="col" className="px-3 py-5 whitespace-nowrap header font-semi-bold text-sm">
+              Phone Number
+            </th>
+            <th scope="col" className="px-3 py-5 whitespace-nowrap header font-semi-bold text-sm">
+              Email
+            </th>
+            <th scope="col" className="px-3 py-5 whitespace-nowrap header font-semi-bold text-sm">
+              Address
+            </th>
+            <th scope="col" className="px-3 py-5 whitespace-nowrap header font-semi-bold text-sm">
+              Longitude
+            </th>
+            <th scope="col" className="px-3 py-5 whitespace-nowrap header font-semi-bold text-sm">
+              Latitude
+            </th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {contacts.map((contact, index) => (
+          /* eslint-disable-next-line */
+          <tr key={index}
+            className="border"
+          >
+            <td className=" whitespace-nowrap px-3 py-4">
+              {contact.name}
+            </td>
+            <td className=" whitespace-nowrap px-3 py-4">
+              {contact.phoneNumber}
+            </td>
+            <td className=" whitespace-nowrap px-3 py-4">
+              {contact.email}
+            </td>
+            <td className=" whitespace-nowrap px-3 py-4">
+              {contact.addresses[Math.floor(Math.random() * contact.addresses.length)]}
+            </td>
+            <td className=" whitespace-nowrap px-3 py-4">
+              {contact.longitude}
+            </td>
+            <td className=" whitespace-nowrap px-3 py-4">
+              {contact.latitude}
+            </td>
+          </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
 

@@ -51,17 +51,16 @@ const Contact = ({
   };
 
   return (
-    <div className="flex items-center">
+    <div className="flex">
       <Sidebar />
-      <div className="flex p-5 justify-center">
+      <div className="flex-col p-5 w-full justify-between overflow-y-auto md:overflow-visible">
 
         <div>
           <h1 className="text-2xl font-semibold mb-4">Add Contact</h1>
-          <form onSubmit={handleSubmit} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+          <form onSubmit={handleSubmit} className="shadow appearance-none border rounded max-w-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
                 Name
-
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="name"
