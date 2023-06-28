@@ -85,7 +85,7 @@ const Contact = ({ handleAddContact }) => {
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="phone"
                   name="phone"
-                  type="tel"
+                  type="text"
                   placeholder="Phone"
                   value={phone}
                   onChange={handleChange}

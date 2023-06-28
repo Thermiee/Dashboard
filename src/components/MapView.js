@@ -20,10 +20,12 @@ const MapView = () => {
       <MapContainer center={[0, 0]} zoom={2} style={{ width: '100%', height: '100%' }}>
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
+        { state && (
         <Marker
           key={state.id}
           position={[state.latitude, state.longitude]}
         >
+
           <Popup>
             <div>
               <h3>{state.name}</h3>
@@ -42,6 +44,7 @@ const MapView = () => {
             </div>
           </Popup>
         </Marker>
+        )}
 
       </MapContainer>
     </div>

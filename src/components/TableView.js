@@ -42,30 +42,31 @@ const TableView = () => {
         </thead>
         <tbody>
 
-          <tr
-            key={state.id}
-            className="border"
-          >
-            <td className=" whitespace-nowrap px-3 py-4">
-              {state.name}
-            </td>
-            <td className=" whitespace-nowrap px-3 py-4">
-              {state.phoneNumber}
-            </td>
-            <td className=" whitespace-nowrap px-3 py-4">
-              {state.email}
-            </td>
-            <td className=" whitespace-nowrap px-3 py-4">
-              {state.addresses[Math.floor(Math.random() * state.addresses.length)]}
-            </td>
-            <td className=" whitespace-nowrap px-3 py-4">
-              {state.longitude}
-            </td>
-            <td className=" whitespace-nowrap px-3 py-4">
-              {state.latitude}
-            </td>
-          </tr>
-
+          { state && (
+            <tr
+              key={state.id}
+              className="border"
+            >
+              <td className=" whitespace-nowrap px-3 py-4">
+                {state.name}
+              </td>
+              <td className=" whitespace-nowrap px-3 py-4">
+                {state.phone}
+              </td>
+              <td className=" whitespace-nowrap px-3 py-4">
+                {state.email}
+              </td>
+              <td className=" whitespace-nowrap px-3 py-4">
+                {state.addresses[Math.floor(Math.random() * state.addresses.length)]}
+              </td>
+              <td className=" whitespace-nowrap px-3 py-4">
+                {state.longitude}
+              </td>
+              <td className=" whitespace-nowrap px-3 py-4">
+                {state.latitude}
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>
