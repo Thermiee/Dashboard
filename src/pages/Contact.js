@@ -51,9 +51,9 @@ const Contact = ({
   };
 
   return (
-    <div className="flex items-center">
+    <div className="flex">
       <Sidebar />
-      <div className="pb-24 md:pb-0 relative w-11/12 overflow-y-auto md:overflow-visible">
+      <div className="flex-col p-5 w-full justify-between overflow-y-auto md:overflow-visible">
 
         <div>
           <h1 className="text-2xl font-semibold mb-4">Add Contact</h1>
@@ -61,7 +61,6 @@ const Contact = ({
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
                 Name
-
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="name"

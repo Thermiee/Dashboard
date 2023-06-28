@@ -23,10 +23,10 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="flex">
+    <div className="flex w-[120px]">
       <div
         className={`${
-          open ? ' w-full' : 'w-1/2'
+          open ? 'w-[130px]' : 'w-[70px]'
         } duration-500 h-screen p-5 pt-8 bg-blue-600 relative`}
       >
         <BsFillArrowLeftCircleFill
@@ -44,17 +44,19 @@ const Sidebar = () => {
           {Menus.map((menu) => (
             <li
               key={menu.name}
-              className="flex gap-x-4 items-center pt-8 bg-blue-600 relative cursor-pointer"
+              className="flex gap-x-4 items-center pt-8 bg-blue-600 cursor-pointer"
             >
               <Link to={menu.path}>
-                <div>{menu.icon}</div>
-                <h1
-                  className={`text-white origin-left text-lg font-medium duration-500 ${
-                    !open && 'scale-0'
-                  }`}
-                >
-                  {menu.name}
-                </h1>
+                <div className="flex items-center">
+                  <div>{menu.icon}</div>
+                  <h1
+                    className={`text-white origin-left p-1 text-base font-medium duration-500 ${
+                      !open && 'scale-0'
+                    }`}
+                  >
+                    {menu.name}
+                  </h1>
+                </div>
               </Link>
             </li>
           ))}
