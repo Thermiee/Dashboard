@@ -57,7 +57,7 @@ const Contact = ({
 
         <div>
           <h1 className="text-2xl font-semibold mb-4">Add Contact</h1>
-          <form onSubmit={handleSubmit} className="shadow appearance-none border rounded w-11/12 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+          <form onSubmit={handleSubmit} className="shadow appearance-none border rounded max-w-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
                 Name
