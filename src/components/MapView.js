@@ -1,6 +1,4 @@
-// MapView.js
-
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   MapContainer, TileLayer, Marker, Popup,
 } from 'react-leaflet';
@@ -10,6 +8,45 @@ import 'leaflet/dist/leaflet.css';
 const MapView = () => {
   const { values } = useAppContext();
   const { contacts } = values;
+  const [markers, setMarkers] = useState([]);
+
+  useEffect(() => {
+    const fetchCoordinates = async (address) => {
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/search?format=json&q=${address}`,
+      );
+      const data = await response.json();
+
+      if (data.length > 0) {
+        const { lat, lon } = data[0];
+        return [parseFloat(lat), parseFloat(lon)];
+      }
+      return null;
+    };
+
+    const fetchMarkers = async () => {
+      const fetchedMarkers = await Promise.all(
+        contacts.map(async (contact) => {
+          if (contact.addresses.length > 0) {
+            const address = contact.addresses[0];
+            const coordinates = await fetchCoordinates(address);
+            if (coordinates) {
+              return {
+                id: contact.id,
+                position: coordinates,
+                contact,
+              };
+            }
+          }
+          return null;
+        }),
+      );
+
+      setMarkers(fetchedMarkers.filter((marker) => marker !== null));
+    };
+
+    fetchMarkers();
+  }, [contacts]);
 
   if (!contacts || (Array.isArray(contacts) && contacts.length === 0)) {
     return (
@@ -26,26 +63,22 @@ const MapView = () => {
       <MapContainer center={[0, 0]} zoom={2} style={{ width: '100%', height: '100%' }}>
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
-        {contacts.map((contact) => (
-          <Marker
-            key={contact.id}
-            position={[contact.latitude, contact.longitude]}
-          >
-
+        {markers.map((marker) => (
+          <Marker key={marker.id} position={marker.position}>
             <Popup>
               <div>
-                <h3>{contact.name}</h3>
+                <h3>{marker.contact.name}</h3>
                 <p>
                   Phone:
-                  {contact.phoneNumber}
+                  {marker.contact.phone}
                 </p>
                 <p>
                   Email:
-                  {contact.email}
+                  {marker.contact.email}
                 </p>
                 <p>
                   Address:
-                  {contact.addresses[0]}
+                  {marker.contact.addresses[0]}
                 </p>
               </div>
             </Popup>
@@ -53,7 +86,6 @@ const MapView = () => {
         ))}
       </MapContainer>
     </div>
-
   );
 };
 
