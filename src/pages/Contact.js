@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import PropTypes from 'prop-types';
-import Sidebar from '../components/Sidebar';
+import { useAppContext } from '../AppContext';
 
 const Contact = () => {
-  const [contacts, setContacts] = useState([]);
+  const { values } = useAppContext();
+  const { contacts, update } = values;
   const [contact, setContact] = useState({
     name: '',
     phone: '',
@@ -26,8 +26,9 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setContacts([...contacts, contact]); // Add the current contact to the contacts array
+    update({ contacts: [...contacts, contact] }); // Add the current contact to the contacts array
     navigate('/', { state: contact });
+
     setContact({
       name: '',
       phone: '',
@@ -37,12 +38,6 @@ const Contact = () => {
       latitude: '',
     });
   };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   handleAddContact(contact);
-
-  // };
 
   const handleAddAddress = () => {
     if (addresses.length < 5) {
@@ -64,8 +59,7 @@ const Contact = () => {
 
   return (
     <div className="flex">
-      <Sidebar />
-      <div className="flex-col p-3 w-full justify-between overflow-y-auto md:overflow-visible">
+      <div className="flex-col p-7 w-full justify-between overflow-y-auto md:overflow-visible">
         <div>
           <h1 className="text-2xl font-semibold mb-4">Add Contact</h1>
           <form
@@ -131,12 +125,12 @@ const Contact = () => {
                 className="block text-gray-700 text-sm font-bold mb-2"
                 htmlFor="longitude"
               >
-                Longitude
+
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="longitude"
                   name="longitude"
-                  type="text"
+                  type="hidden"
                   placeholder="Longitude"
                   value={longitude}
                   onChange={handleChange}
@@ -149,12 +143,12 @@ const Contact = () => {
                 className="block text-gray-700 text-sm font-bold mb-2"
                 htmlFor="latitude"
               >
-                Latitude
+
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="latitude"
                   name="latitude"
-                  type="text"
+                  type="hidden"
                   placeholder="Latitude"
                   value={latitude}
                   onChange={handleChange}
@@ -212,9 +206,5 @@ const Contact = () => {
     </div>
   );
 };
-
-// Contact.propTypes = {
-//   handleAddContact: PropTypes.func.isRequired,
-// };
 
 export default Contact;

@@ -1,11 +1,11 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useAppContext } from '../AppContext';
 
 const TableView = () => {
-  const location = useLocation();
-  const { state } = location;
+  const { values } = useAppContext();
+  const { contacts } = values;
 
-  if (!state || (Array.isArray(state) && state.length === 0)) {
+  if (!contacts || (Array.isArray(contacts) && contacts.length === 0)) {
     return (
       <div className="flex justify-center">
         <h1 className="text-3xl text-gray-700">
@@ -14,8 +14,6 @@ const TableView = () => {
       </div>
     );
   }
-
-  const contacts = Array.isArray(state) ? state : [state];
 
   return (
     <div className=" md:pb-0 relative w-full overflow-y-auto md:overflow-visible">
@@ -34,12 +32,6 @@ const TableView = () => {
             <th scope="col" className="px-3 py-5 whitespace-nowrap header font-semi-bold text-sm">
               Address
             </th>
-            <th scope="col" className="px-3 py-5 whitespace-nowrap header font-semi-bold text-sm">
-              Longitude
-            </th>
-            <th scope="col" className="px-3 py-5 whitespace-nowrap header font-semi-bold text-sm">
-              Latitude
-            </th>
           </tr>
         </thead>
         <tbody>
@@ -51,8 +43,6 @@ const TableView = () => {
               <td className="whitespace-nowrap px-3 py-4">
                 {contact.addresses[Math.floor(Math.random() * contact.addresses.length)]}
               </td>
-              <td className="whitespace-nowrap px-3 py-4">{contact.longitude}</td>
-              <td className="whitespace-nowrap px-3 py-4">{contact.latitude}</td>
             </tr>
           ))}
         </tbody>

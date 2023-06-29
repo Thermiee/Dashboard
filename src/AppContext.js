@@ -1,10 +1,14 @@
-import React, { createContext, useState } from 'react';
+/* eslint-disable no-unused-vars */
+/* eslint-disable max-len */
+import React, {
+  createContext, useMemo, useReducer, useContext,
+} from 'react';
 import PropTypes from 'prop-types';
 
 export const AppStateContext = createContext();
 
 export const AppStateProvider = ({ children }) => {
-  const [state, setState] = useState({
+  const initialState = {
     view: 'table',
     contacts: [],
     contact: {
@@ -15,14 +19,21 @@ export const AppStateProvider = ({ children }) => {
       longitude: '',
       latitude: '',
     },
-  });
+  };
+  const [state, setState] = useReducer((state, newState) => ({ ...state, ...newState }), initialState);
+  const { loading, selectedBusiness, ...restState } = state;
+  const values = useMemo(() => ({
+    ...restState, update: setState,
+  }), [restState]);
 
   return (
-    <AppStateContext.Provider value={{ state, setState }}>
+    <AppStateContext.Provider value={{ values }}>
       {children}
     </AppStateContext.Provider>
   );
 };
+
+export const useAppContext = () => useContext(AppStateContext);
 
 AppStateProvider.propTypes = {
   children: PropTypes.node.isRequired,
