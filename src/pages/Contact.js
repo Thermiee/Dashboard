@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import Sidebar from '../components/Sidebar';
 
-const Contact = ({ handleAddContact }) => {
+const Contact = () => {
+  const [contacts, setContacts] = useState([]);
   const [contact, setContact] = useState({
     name: '',
     phone: '',
@@ -12,8 +13,6 @@ const Contact = ({ handleAddContact }) => {
     longitude: '',
     latitude: '',
   });
-
-  // const [contactList, setContactList] = useState([]); // [{}
 
   const navigate = useNavigate();
 
@@ -27,9 +26,23 @@ const Contact = ({ handleAddContact }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleAddContact(contact);
+    setContacts([...contacts, contact]); // Add the current contact to the contacts array
     navigate('/', { state: contact });
+    setContact({
+      name: '',
+      phone: '',
+      email: '',
+      addresses: [''],
+      longitude: '',
+      latitude: '',
+    });
   };
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   handleAddContact(contact);
+
+  // };
 
   const handleAddAddress = () => {
     if (addresses.length < 5) {
@@ -200,8 +213,8 @@ const Contact = ({ handleAddContact }) => {
   );
 };
 
-Contact.propTypes = {
-  handleAddContact: PropTypes.func.isRequired,
-};
+// Contact.propTypes = {
+//   handleAddContact: PropTypes.func.isRequired,
+// };
 
 export default Contact;

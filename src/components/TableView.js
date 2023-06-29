@@ -5,7 +5,7 @@ const TableView = () => {
   const location = useLocation();
   const { state } = location;
 
-  if (!state) {
+  if (!state || (Array.isArray(state) && state.length === 0)) {
     return (
       <div className="flex justify-center">
         <h1 className="text-3xl text-gray-700">
@@ -14,6 +14,8 @@ const TableView = () => {
       </div>
     );
   }
+
+  const contacts = Array.isArray(state) ? state : [state];
 
   return (
     <div className=" md:pb-0 relative w-full overflow-y-auto md:overflow-visible">
@@ -41,32 +43,18 @@ const TableView = () => {
           </tr>
         </thead>
         <tbody>
-
-          { state && (
-            <tr
-              key={state.id}
-              className="border"
-            >
-              <td className=" whitespace-nowrap px-3 py-4">
-                {state.name}
+          {contacts.map((contact) => (
+            <tr key={contact.id} className="border">
+              <td className="whitespace-nowrap px-3 py-4">{contact.name}</td>
+              <td className="whitespace-nowrap px-3 py-4">{contact.phone}</td>
+              <td className="whitespace-nowrap px-3 py-4">{contact.email}</td>
+              <td className="whitespace-nowrap px-3 py-4">
+                {contact.addresses[Math.floor(Math.random() * contact.addresses.length)]}
               </td>
-              <td className=" whitespace-nowrap px-3 py-4">
-                {state.phone}
-              </td>
-              <td className=" whitespace-nowrap px-3 py-4">
-                {state.email}
-              </td>
-              <td className=" whitespace-nowrap px-3 py-4">
-                {state.addresses[Math.floor(Math.random() * state.addresses.length)]}
-              </td>
-              <td className=" whitespace-nowrap px-3 py-4">
-                {state.longitude}
-              </td>
-              <td className=" whitespace-nowrap px-3 py-4">
-                {state.latitude}
-              </td>
+              <td className="whitespace-nowrap px-3 py-4">{contact.longitude}</td>
+              <td className="whitespace-nowrap px-3 py-4">{contact.latitude}</td>
             </tr>
-          )}
+          ))}
         </tbody>
       </table>
     </div>
