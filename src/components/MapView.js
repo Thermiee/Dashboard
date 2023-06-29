@@ -59,7 +59,7 @@ const MapView = () => {
   }
 
   return (
-    <div style={{ width: '200%', height: '400px' }}>
+    <div style={{ width: '400%', height: '400px' }}>
       <MapContainer center={[0, 0]} zoom={2} style={{ width: '100%', height: '100%' }}>
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
