@@ -21,7 +21,7 @@ export const AppStateProvider = ({ children }) => {
     },
   };
   const [state, setState] = useReducer((state, newState) => ({ ...state, ...newState }), initialState);
-  const { loading, selectedContact, ...restState } = state;
+  const { ...restState } = state;
   const values = useMemo(() => ({
     ...restState, update: setState,
   }), [restState]);
