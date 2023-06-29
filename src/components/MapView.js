@@ -29,9 +29,7 @@ const MapView = () => {
         {contacts.map((contact) => (
           <Marker
             key={contact.id}
-            position={
-              [contact.addresses[0].latitude, contact.addresses[0].longitude]
-            }
+            position={[contact.latitude, contact.longitude]}
           >
 
             <Popup>
