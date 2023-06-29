@@ -1,11 +1,11 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useAppContext } from '../AppContext';
 
 const TableView = () => {
-  const location = useLocation();
-  const { state } = location;
+  const { values } = useAppContext();
+  const { contacts } = values;
 
-  if (!state) {
+  if (!contacts || (Array.isArray(contacts) && contacts.length === 0)) {
     return (
       <div className="flex justify-center">
         <h1 className="text-3xl text-gray-700">
@@ -32,41 +32,19 @@ const TableView = () => {
             <th scope="col" className="px-3 py-5 whitespace-nowrap header font-semi-bold text-sm">
               Address
             </th>
-            <th scope="col" className="px-3 py-5 whitespace-nowrap header font-semi-bold text-sm">
-              Longitude
-            </th>
-            <th scope="col" className="px-3 py-5 whitespace-nowrap header font-semi-bold text-sm">
-              Latitude
-            </th>
           </tr>
         </thead>
         <tbody>
-
-          { state && (
-            <tr
-              key={state.id}
-              className="border"
-            >
-              <td className=" whitespace-nowrap px-3 py-4">
-                {state.name}
-              </td>
-              <td className=" whitespace-nowrap px-3 py-4">
-                {state.phone}
-              </td>
-              <td className=" whitespace-nowrap px-3 py-4">
-                {state.email}
-              </td>
-              <td className=" whitespace-nowrap px-3 py-4">
-                {state.addresses[Math.floor(Math.random() * state.addresses.length)]}
-              </td>
-              <td className=" whitespace-nowrap px-3 py-4">
-                {state.longitude}
-              </td>
-              <td className=" whitespace-nowrap px-3 py-4">
-                {state.latitude}
+          {contacts.map((contact) => (
+            <tr key={contact.id} className="border">
+              <td className="whitespace-nowrap px-3 py-4">{contact.name}</td>
+              <td className="whitespace-nowrap px-3 py-4">{contact.phone}</td>
+              <td className="whitespace-nowrap px-3 py-4">{contact.email}</td>
+              <td className="whitespace-nowrap px-3 py-4">
+                {contact.addresses[Math.floor(Math.random() * contact.addresses.length)]}
               </td>
             </tr>
-          )}
+          ))}
         </tbody>
       </table>
     </div>
