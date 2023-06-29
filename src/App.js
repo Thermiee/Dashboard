@@ -1,25 +1,44 @@
 import './App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Dashboard from './pages/Dashboard';
-import Contact from './pages/Contact';
+import React, { lazy } from 'react';
+import { useRoutes, Navigate } from 'react-router-dom';
+import Loadable from './components/Loadable';
+import { AppStateProvider } from './AppContext';
+import MainLayout from './components/Layout';
+
+const Dashboard = Loadable(lazy(() => import('./pages/Dashboard')));
+const Contact = Loadable(lazy(() => import('./pages/Contact')));
+
+export const AppRoutes = {
+  path: '/',
+  element: (
+    <AppStateProvider>
+      <MainLayout />
+    </AppStateProvider>
+
+  ),
+  children: [
+    {
+      path: '/',
+      element: <Navigate to="/dashboard" replace />,
+    },
+    {
+      path: '/dashboard',
+      element: <Dashboard />,
+    },
+    {
+      path: '/contact',
+      element: <Contact />,
+    },
+  ],
+};
+
+const Routes = () => useRoutes([
+  AppRoutes,
+]);
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" caseSensitive={false} element={<Dashboard />} />
-        <Route path="/dashboard" caseSensitive={false} element={<Dashboard />} />
-        <Route
-          path="/contact"
-          caseSensitive={false}
-          element={(
-            <Contact
-              handleAddContact={() => {}}
-            />
-)}
-        />
-      </Routes>
-    </Router>
+    <Routes />
   );
 }
 

@@ -13,7 +13,7 @@ const Sidebar = () => {
       icon: (
         <RiDashboardLine className="cursor-pointer duration-500 text-white" />
       ),
-      path: '/dashboard',
+      path: '/',
     },
     {
       name: 'Contact',
@@ -26,7 +26,7 @@ const Sidebar = () => {
     <div className="flex">
       <div
         className={`${
-          open ? 'w-[130px]' : 'w-[70px]'
+          open ? 'w-[250px]' : 'w-[70px]'
         } duration-500 h-screen p-5 pt-8 bg-blue-600 relative`}
       >
         <BsFillArrowLeftCircleFill
