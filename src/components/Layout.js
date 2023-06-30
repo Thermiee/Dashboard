@@ -7,8 +7,13 @@ const MainLayout = () => {
   const state = {};
   return (
     <div className="flex">
-      <Sidebar />
-      <div className="">
+      <div>
+        <Sidebar />
+      </div>
+
+      <div className="flex flex-col flex-auto h-screen overflow-hidden
+"
+      >
         <Outlet />
       </div>
     </div>
