@@ -47,6 +47,13 @@ const Contact = () => {
     }
   };
 
+  const validateEmail = (email) => {
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    return emailRegex.test(email);
+  };
+
+  const isEmailValid = validateEmail(email);
+
   const handleAddAddress = () => {
     if (addresses.length < 5) {
       setContact({ ...contact, addresses: [...addresses, ''] });
@@ -104,7 +111,7 @@ const Contact = () => {
                   id="phone"
                   name="phone"
                   type="text"
-                  placeholder="Phone"
+                  placeholder="Enter 11 digits number"
                   value={phone}
                   onChange={handleChange}
                   required
@@ -118,7 +125,9 @@ const Contact = () => {
               >
                 Email
                 <input
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                    !isEmailValid && 'border-red-500'
+                  }`}
                   id="email"
                   name="email"
                   type="email"
@@ -127,6 +136,9 @@ const Contact = () => {
                   onChange={handleChange}
                   required
                 />
+                {!isEmailValid && (
+                <p className="text-red-500 text-xs italic">Please enter a valid email address.</p>
+                )}
               </label>
             </div>
             <div className="mb-4">
