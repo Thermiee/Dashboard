@@ -15,6 +15,7 @@ const Contact = () => {
   });
 
   const navigate = useNavigate();
+  const [error, setError] = useState('');
 
   const {
     name, phone, email, addresses, longitude, latitude,
@@ -26,17 +27,24 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    update({ contacts: [...contacts, contact] }); // Add the current contact to the contacts array
-    navigate('/', { state: contact });
 
-    setContact({
-      name: '',
-      phone: '',
-      email: '',
-      addresses: [''],
-      longitude: '',
-      latitude: '',
-    });
+    const phoneRegex = /^\d{11}$/;
+
+    if (phoneRegex.test(phone)) {
+      update({ contacts: [...contacts, contact] });
+      navigate('/', { state: contact });
+
+      setContact({
+        name: '',
+        phone: '',
+        email: '',
+        addresses: [''],
+        longitude: '',
+        latitude: '',
+      });
+    } else {
+      setError('Invalid phone number');
+    }
   };
 
   const handleAddAddress = () => {
@@ -84,6 +92,7 @@ const Contact = () => {
                 />
               </label>
             </div>
+            {error && <p className="text-red-500">{error}</p>}
             <div className="mb-4">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
