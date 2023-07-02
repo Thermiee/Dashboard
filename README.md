@@ -39,6 +39,7 @@
 > 7. Latitude
 
 > Add Contact Constraints
+> 
 > 1. All fields should be required
 > 2. The phone number field should have a phone number validation
 > 3. The email field should have an email validation
